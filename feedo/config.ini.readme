@@ -1,0 +1,7 @@
+# set variables and rename this config to 'config.ini'
+[mail]
+default_from_email 		=
+email_port     			=
+email_host      		=
+email_host_user 		=
+email_host_password 	=

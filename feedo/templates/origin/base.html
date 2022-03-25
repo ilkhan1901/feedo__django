@@ -1,0 +1,62 @@
+{% load blog_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=0">
+	<title>Document</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="{% static "css/blog.css" %}">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body class="bg-light">
+	<div class="wrapper mb-5">
+		{% include './header.html' %}
+		<div class="container">
+			<div class="d-block d-md-flex" style="gap: 0.5em;">
+				<div class="w-100">
+					{% block content %}
+					{% endblock %}
+				</div>
+				<div>
+					<div class="sidebar">
+						<div class="p-2 card mb-2">
+							<h5><i class="fa-solid fa-fire"></i> Most commented</h5>
+							{% get_most_commented_posts as most_commented_posts %}
+							{% for post in most_commented_posts %}
+								<a class="card bg-light p-1 mt-2 text-reset text-decoration-none" href="{{post.get_absolute_url}}">
+									<span class="d-flex justify-content-between">
+										<span class="text-decoration-underline mr-3">
+											{{post.title}}	
+										</span>
+										<span class="text-muted">
+											{{ post.get_comments_number }} <i class="fa-solid fa-comment"></i>
+										</span>
+									</span>
+									<div class="text-muted">
+										<small>
+											{{post.created|date:"j.mY \a\t H:i"}}
+										</small>
+									</div>
+								</a>
+							{% endfor %}
+						</div>
+						{% block sidebar_extra %}
+						{% endblock %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container my-5">
+			<div class="text-center text-muted">
+				<small>
+					&copy; Lama's ~
+					total {% total_posts %} posts
+				</small>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

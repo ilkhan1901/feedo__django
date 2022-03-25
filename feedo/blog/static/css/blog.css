@@ -1,0 +1,14 @@
+.sidebar{
+	width: 300px;
+}
+
+.comment-textarea{
+	height: 100px;
+}
+
+@media (max-width: 768px){
+	.sidebar{
+		width: 100%;
+	}
+}
+
