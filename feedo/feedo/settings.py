@@ -13,9 +13,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import configparser
 
-CONFIG = configparser.ConfigParser()
-CONFIG.read('config.ini')
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -129,7 +126,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 DEFAULT_FROM_EMAIL = CONFIG['mail']['default_from_email']
 EMAIL_BACKEND   = 'django.core.mail.backends.smtp.EmailBackend'
